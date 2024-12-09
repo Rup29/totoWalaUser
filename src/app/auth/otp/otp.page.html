@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true">
+  <div class="loginWapper">
+    <div class="loginWapperlogo">
+      <img src="assets/images/logt.png" class="fvIcon">
+      <img src="assets/images/logo.png" class="logo">
+     <h1>OTP Verification</h1>
+    </div>
+    <div class="loginWapperform">
+     <form [formGroup]="logForm" (ngSubmit)="logFormData()">
+      
+      <div class="formGroup">
+        <input type="number" placeholder="0" formGroupName="otp1" max="1">
+        <input type="number" placeholder="0" formGroupName="otp2" max="1">
+        <input type="number" placeholder="0" formGroupName="otp3" max="1">
+        <input type="number" placeholder="0" formGroupName="otp4" max="1">
+      </div>
+      <ion-button type="submit" class="comBtn" style="margin-top: 0px;">Continue</ion-button>
+      <p style="text-align: center;">
+        <span><ion-icon name="reload-outline"></ion-icon> Resend OTP</span>
+        </p>
+    </form>
+    </div>
+  </div>
+  </ion-content>
+  

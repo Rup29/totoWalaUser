@@ -1,0 +1,243 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <div class="pageWapper">
+    <ion-fab slot="fixed" vertical="top" horizontal="start" class="menuBtn">
+      <ion-fab-button>
+        <ion-icon name="grid-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="end">
+        <ion-fab-button>
+          <ion-icon name="person"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="document-text"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="notifications"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="cog"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="power"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+    <ng-container *ngIf="mapLoad">
+      <span class="lodingmap"><ion-icon name="ellipse-outline"></ion-icon> Loding...</span>
+    </ng-container>
+    <div style="height: 100%;" #map>
+    </div>
+    <div class="bottom_sec" id="bottomSer">
+      <ng-container *ngIf="tripStart">
+        <div class="userDetails">
+          <div class="user-top">
+            <div class="userleft">
+              <ion-avatar>
+                <img src="assets/images/user.webp">
+              </ion-avatar>
+              <div class="userName">
+                <h2>Soumen Patra</h2>
+                <p>9056786543</p>
+              </div>
+            </div>
+            <ion-button (click)="getCurrentLocation()" class="getLocation">
+              <ion-icon name="locate-outline"></ion-icon>
+            </ion-button>
+          </div>
+          <ion-button (click)="tripStartFun()" class="comBtn">
+            Start Ride
+          </ion-button>
+          <div class="popularlocation">
+            <swiper-container  [slidesPerView]="'3'" [loop]="true" [spaceBetween]="10">
+              <swiper-slide><span>Goura Bus Stop</span></swiper-slide>
+              <swiper-slide><span>Sonamui</span></swiper-slide>
+              <swiper-slide><span>Khukhudaha</span></swiper-slide>
+              <swiper-slide><span>Sonakhali</span></swiper-slide>
+              <swiper-slide><span>Chaipart</span></swiper-slide>
+              <swiper-slide><span>Banglagora</span></swiper-slide>
+            </swiper-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="tripSearch">
+        <div class="searchDestination">
+          <h2>Good Morning Soumen</h2>
+          <div class="selectTime">
+            <label>Where To ?</label>
+            <div class="time">
+              <ion-icon name="time"></ion-icon>
+           <select>
+            <option>Now</option>
+            <option>6:00 AM</option>
+            <option>6:10 AM</option>
+            <option>6:20 AM</option>
+            <option>6:30 AM</option>
+            <option>6:40 AM</option>
+            <option>6:50 AM</option>
+            <option>7:00 AM</option>
+            <option>7:10 AM</option>
+            <option>7:20 AM</option>
+            <option>7:30 AM</option>
+            <option>7:40 AM</option>
+            <option>7:50 AM</option>
+            <option>8:00 AM</option>
+            <option>8:10 AM</option>
+            <option>8:20 AM</option>
+            <option>8:30 AM</option>
+            <option>8:40 AM</option>
+            <option>8:50 AM</option>
+            <option>9:00 AM</option>
+           </select>
+            </div>
+          </div>
+          <div class="searchForm" >
+            <form [formGroup]="searchForm" (ngSubmit)="serchDeriction()" >
+              <div class="formGroup">
+                <label>Pick up</label>
+                <input type="text" placeholder="Enter Pickup location" formControlName="pickUp" (click)="openModal()">
+              </div>
+              <div class="formGroup border0">
+                <label>Drop Off</label>
+                <input type="text" placeholder="Enter Drop location" formControlName="dropUp" (click)="openModal()">
+              </div>
+              <ion-button type="submit" [disabled]="searchForm.invalid" class="comBtn">Trip</ion-button>
+            </form>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="tripConfirm">
+        <div class="searchDestination confirmTrip">
+          <div class="handel"><span (click)="downPop()"></span></div>
+          <h2>Select your car</h2>
+        
+          <div class="searchForm" >
+            <div class="searchForms">
+            
+              <div class="startEnd">
+
+              </div>
+              <div class="frms">
+                <div class="formGroup" style="margin-top: 0px;">
+                  <h4>{{pkLocation? pkLocation:'Your Location'}}</h4>
+                </div>
+                <div class="formGroup border0">
+                  <h4>{{drpLocation}}</h4>
+                </div>
+              </div>
+             
+             </div>
+             <div class="fairChat">
+              <span><ion-icon name="time-outline"></ion-icon> {{liveDuration}}</span>
+              <span><ion-icon name="man"></ion-icon> {{liveKm}}</span>
+              <span style="background: #12c142; color: #fff;">Price {{livePrice*10}}</span>
+             </div>
+             <div class="selectToto">
+              <div class="totoItem" style="margin-bottom: 15px;" (click)="choosePrivate()">
+                <div class="totoImage">
+                  <img src="assets/images/private.png"/>
+                </div>
+                <div class="totoName">
+                  <h3>5 Sit Private toto</h3>
+                  <span><ion-icon name="pricetags"></ion-icon> {{livePrice*10}}</span>
+                </div>
+              </div>
+              <div class="totoItem" (click)="chooseShare()">
+                <div class="totoImage">
+                  <img src="assets/images/toto.webp"/>
+                </div>
+                <div class="totoName">
+                  <h3>5 Sit Share toto</h3>
+                  <span><ion-icon name="pricetags"></ion-icon> {{livePrice*5}}</span>
+                </div>
+              </div>
+            <ng-container *ngIf="selectSit">
+             <div class="chooseSit">
+              <label>Select Sit</label>
+              <div class="sitControl">
+                <span (click)="removeSit()"><ion-icon name="remove-outline"></ion-icon></span>
+                <input type="text" readonly [value]="sitNumber"/>
+                <span (click)="addSit()"><ion-icon name="add-outline"></ion-icon></span>
+              </div>
+             </div>
+            </ng-container>
+             </div>
+            <ion-button  class="comBtn" (click)="findingSit()">{{findDriver? 'Finding...':'Continue'}}</ion-button>
+          </div>
+        </div>
+      </ng-container>
+   
+
+    </div>
+  </div>
+  <!---destinatin-->
+  <ion-modal [keepContentsMounted]="true"  #modal [isOpen]="modalIsOpen">
+    <ng-template>
+      
+      <ion-content >
+        <div class="searpop">
+             <div class="searchForms">
+              <div class="headertop">
+                <span (click)="back()"><ion-icon name="arrow-back-outline"></ion-icon></span>
+                <h3>Search Destination</h3>
+              </div>
+              <div class="startEnd">
+
+              </div>
+              <div class="frms">
+                <form [formGroup]="searchPopForm">
+                  <div class="formGroup">
+                    <input type="text" placeholder="Enter Pickup location"   (input)="onChangepk($event)" formControlName="pkValue">
+                    <span class="currntLoc" (click)="pkupCurrentLocation()"><ion-icon name="locate-outline"></ion-icon></span>
+                  </div>
+                  <div class="formGroup border0">
+                    <input type="text" placeholder="Enter Drop location"  (input)="onChangedp($event)" formControlName="drValue">
+                  </div>
+                </form>
+                
+              </div>
+             
+             </div>
+            
+            <ng-container *ngIf="pickUp">
+              <ion-list *ngIf="places?.length > 0" class="sharchList">
+                <div *ngFor="let place of places" class="searchitem" (click)="selectPickup(place)">
+                  <ion-icon name="navigate-circle"></ion-icon>
+                  <ion-label>
+                    {{ place?.title }}
+                    <p>
+                      <ion-text>
+                        {{ place?.address }}
+                      </ion-text>
+                    </p>
+                  </ion-label>
+                </div>
+              </ion-list>
+            </ng-container>
+            <ng-container *ngIf="dropOf">
+              <ion-list *ngIf="places?.length > 0" class="sharchList">
+                <div *ngFor="let place of places" class="searchitem" (click)="selectDrop(place)">
+                  <ion-icon name="navigate-circle"></ion-icon>
+                  <ion-label>
+                    {{ place?.title }}
+                    <p>
+                      <ion-text>
+                        {{ place?.address }}
+                      </ion-text>
+                    </p>
+                  </ion-label>
+                </div>
+              </ion-list>
+            </ng-container>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

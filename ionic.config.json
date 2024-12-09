@@ -1,0 +1,7 @@
+{
+  "name": "Pro Rider",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

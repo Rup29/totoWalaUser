@@ -1,0 +1,20 @@
+
+<ion-content [fullscreen]="true">
+<div class="loginWapper">
+  <div class="loginWapperlogo">
+    <img src="assets/images/logt.png" class="fvIcon">
+    <img src="assets/images/logo.png" class="logo">
+   <h1>Welcom Back !</h1>
+  </div>
+  <div class="loginWapperform">
+   <form [formGroup]="logForm" (ngSubmit)="logFormData()">
+    
+    <div class="formGroup">
+      <label>Enter Mobile Number</label>
+      <input type="number" placeholder="+91 965328276" formGroupName="mobileNumber">
+    </div>
+    <ion-button type="submit" class="comBtn" style="margin-top: 0px;">Login</ion-button>
+   </form>
+  </div>
+</div>
+</ion-content>

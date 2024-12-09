@@ -1,0 +1,78 @@
+.loginWapper{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    .loginWapperlogo{
+        width: 100%;
+        height: 50%;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border-bottom-right-radius: 50px;
+        position: relative;
+        &::before{
+            position: absolute;
+            content: "";
+            background: #fff;
+            width: 50px;
+            height: 100px;
+            left: 0px;
+            bottom: -74px;
+        }
+        img{
+            width: 200px;
+            display: block;
+            margin: 0 auto;
+        }
+        h1{
+            text-align: center;
+            font-size: 35px;
+            margin: 0px;
+            margin-top: 20px;
+            color: #000;
+        }
+    }
+    .loginWapperform{
+        width: 100%;
+        height: 50%;
+        background-color: #fff;
+        border-top-left-radius: 50px;
+        position: relative;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        // justify-content: center;
+        background-image: url("../../../assets/images/back.png");
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        .formGroup{
+            position: relative;
+            padding-bottom: 20px;
+           
+            label{
+                color: #000;
+                font-size: 14px;
+                font-weight: 500;
+                display: block;
+                margin-bottom: 10px;
+            }
+            input{
+                width: 100%;
+                height: 45px;
+                border: 0px;
+                outline: none;
+                border-radius: 10px;
+                padding: 10px 15px;
+                background: rgb(204 204 204 / 38%);
+                font-weight: 500;
+                font-size: 19px;
+                color: #000;
+            }
+        }
+    }
+}
